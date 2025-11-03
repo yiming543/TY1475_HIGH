@@ -1,0 +1,4 @@
+D:/yiming/00work/TY1475_HIGH_V05.X/_build/TY1475_HIGH_R_V03/default/CMakeFiles/TY1475_HIGH_R_V03_default_default_XC8_compile.dir
+D:/yiming/00work/TY1475_HIGH_V05.X/_build/TY1475_HIGH_R_V03/default/CMakeFiles/TY1475_HIGH_R_V03_default_image_nqhNnNYj.dir
+D:/yiming/00work/TY1475_HIGH_V05.X/_build/TY1475_HIGH_R_V03/default/CMakeFiles/edit_cache.dir
+D:/yiming/00work/TY1475_HIGH_V05.X/_build/TY1475_HIGH_R_V03/default/CMakeFiles/rebuild_cache.dir
