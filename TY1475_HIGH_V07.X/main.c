@@ -88,6 +88,9 @@
 // 抓到所有資料(包括車子沒有的信號)
 // 修正不符合KD件的亮燈方式
 
+// 20260304 V07 CS:7076
+// 新增lamp off信號(關閉所有LED)
+
 #include "mcc_generated_files/mcc.h"
 #include "mcc_generated_files/pin_manager.h"
 #include <pic.h>
@@ -271,12 +274,19 @@ static uint8_t CS[64] = {
 // 特殊信號(unlock) 亮P2
 void Exception_handling(void) {
   if ((data_buf[2] == 6) && (data_buf[10] == 0xD5)) {
-    P2_ON(); // P2亮
     fException = 1;
+    P2_ON();
     // EPWM1_LoadDutyValue(PWM_DUTY_0_PERCENT); // 0%
     LoBeam_OFF();  // 遠燈 OFF
     HiBeam_OFF();  // 遠燈 OFF
     POS_ON();      // POS ON
+    T10MS_CNT = 0; // 重置2000ms計數器
+  } else if ((data_buf[2] == 2) && (data_buf[10] == 0xB4)) {
+    fException = 1;
+    P2_OFF();
+    LoBeam_OFF();  // 遠燈 OFF
+    HiBeam_OFF();  // 遠燈 OFF
+    DRL_OFF();     // DRL OFF
     T10MS_CNT = 0; // 重置2000ms計數器
   } else {
     fException = 0;
@@ -626,7 +636,7 @@ void TMR0_EvenHandler(void) {
 /*
                          Main application
  */
-void main(void) {
+int main(void) {
   // initialize the device
   SYSTEM_Initialize();
   TMR0_SetInterruptHandler(TMR0_EvenHandler);
@@ -639,12 +649,6 @@ void main(void) {
 
   // Enable the Peripheral Interrupts
   INTERRUPT_PeripheralInterruptEnable();
-
-  // Disable the Global Interrupts
-  // INTERRUPT_GlobalInterruptDisable();
-
-  // Disable the Peripheral Interrupts
-  // INTERRUPT_PeripheralInterruptDisable();
 
   while (1) {
     // 左邊燈具選擇
