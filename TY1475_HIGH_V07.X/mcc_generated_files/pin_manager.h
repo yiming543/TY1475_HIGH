@@ -110,6 +110,20 @@
 #define Lamp_R_EN_SetAnalogMode()      do { ANSELBbits.ANSB3 = 1; } while(0)
 #define Lamp_R_EN_SetDigitalMode()     do { ANSELBbits.ANSB3 = 0; } while(0)
 
+// get/set UART_TX aliases
+#define UART_TX_TRIS                 TRISBbits.TRISB6
+#define UART_TX_LAT                  LATBbits.LATB6
+#define UART_TX_PORT                 PORTBbits.RB6
+#define UART_TX_WPU                  WPUBbits.WPUB6
+#define UART_TX_SetHigh()            do { LATBbits.LATB6 = 1; } while(0)
+#define UART_TX_SetLow()             do { LATBbits.LATB6 = 0; } while(0)
+#define UART_TX_Toggle()             do { LATBbits.LATB6 = ~LATBbits.LATB6; } while(0)
+#define UART_TX_GetValue()           PORTBbits.RB6
+#define UART_TX_SetDigitalInput()    do { TRISBbits.TRISB6 = 1; } while(0)
+#define UART_TX_SetDigitalOutput()   do { TRISBbits.TRISB6 = 0; } while(0)
+#define UART_TX_SetPullup()          do { WPUBbits.WPUB6 = 1; } while(0)
+#define UART_TX_ResetPullup()        do { WPUBbits.WPUB6 = 0; } while(0)
+
 // get/set LB_EN aliases
 #define LB_EN_TRIS                 TRISCbits.TRISC1
 #define LB_EN_LAT                  LATCbits.LATC1
@@ -128,17 +142,6 @@
 #define RC2_GetValue()              PORTCbits.RC2
 #define RC2_SetDigitalInput()    do { TRISCbits.TRISC2 = 1; } while(0)
 #define RC2_SetDigitalOutput()   do { TRISCbits.TRISC2 = 0; } while(0)
-
-// get/set UART_TX aliases
-#define UART_TX_TRIS                 TRISCbits.TRISC4
-#define UART_TX_LAT                  LATCbits.LATC4
-#define UART_TX_PORT                 PORTCbits.RC4
-#define UART_TX_SetHigh()            do { LATCbits.LATC4 = 1; } while(0)
-#define UART_TX_SetLow()             do { LATCbits.LATC4 = 0; } while(0)
-#define UART_TX_Toggle()             do { LATCbits.LATC4 = ~LATCbits.LATC4; } while(0)
-#define UART_TX_GetValue()           PORTCbits.RC4
-#define UART_TX_SetDigitalInput()    do { TRISCbits.TRISC4 = 1; } while(0)
-#define UART_TX_SetDigitalOutput()   do { TRISCbits.TRISC4 = 0; } while(0)
 
 // get/set RC6 procedures
 #define RC6_SetHigh()            do { LATCbits.LATC6 = 1; } while(0)

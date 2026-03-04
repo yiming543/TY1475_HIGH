@@ -1,7 +1,7 @@
 ### HEXMate logfile and output summary ###
 
 ### Command-line arguments ###
- C:\Users\t00904\AppData\Local\Temp\xcAsjt4.\driver_tmp_3.o
+ C:\Users\t00904\AppData\Local\Temp\xcAsgus.\driver_tmp_3.o
  -Odist/default/production\TY1475_HIGH_V07.X.production.hex
  -logfile=dist/default/production\TY1475_HIGH_V07.X.production.hxl
  -format=INHX032
@@ -9,17 +9,17 @@
 
 ### Memory Usage ###
  Input file ranges:
-  0h - 3h		(C:\Users\t00904\AppData\Local\Temp\xcAsjt4.\driver_tmp_3.o)
-  8h - A3Dh		(C:\Users\t00904\AppData\Local\Temp\xcAsjt4.\driver_tmp_3.o)
-  1000Eh - 10011h		(C:\Users\t00904\AppData\Local\Temp\xcAsjt4.\driver_tmp_3.o)
+  0h - 3h		(C:\Users\t00904\AppData\Local\Temp\xcAsgus.\driver_tmp_3.o)
+  8h - A0Dh		(C:\Users\t00904\AppData\Local\Temp\xcAsgus.\driver_tmp_3.o)
+  1000Eh - 10011h		(C:\Users\t00904\AppData\Local\Temp\xcAsgus.\driver_tmp_3.o)
  Unused ranges:
   4h - 7h
-  A3Eh - 1000Dh
+  A0Eh - 1000Dh
 
 ### Hex Memory Map ###
  Legend:
   -- = Unused memory
-  H1 = Input file             (C:\Users\t00904\AppData\Local\Temp\xcAsjt4.\driver_tmp_3.o)
+  H1 = Input file             (C:\Users\t00904\AppData\Local\Temp\xcAsgus.\driver_tmp_3.o)
 ----------------------------------------------------------
          | 00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F
 ----------------------------------------------------------
@@ -183,10 +183,7 @@
 000009D0 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
 000009E0 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
 000009F0 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
-00000A00 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
-00000A10 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
-00000A20 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
-00000A30 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 -- --
+00000A00 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 -- --
 ----------------------------------------------------------
 00010000 | -- -- -- -- -- -- -- -- -- -- -- -- -- -- H1 H1
 00010010 | H1 H1 -- -- -- -- -- -- -- -- -- -- -- -- -- --

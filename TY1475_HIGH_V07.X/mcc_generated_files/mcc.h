@@ -53,8 +53,8 @@
 #include <stdbool.h>
 #include <conio.h>
 #include "interrupt_manager.h"
-#include "eccp3.h"
 #include "epwm1.h"
+#include "eccp3.h"
 #include "tmr1.h"
 #include "tmr2.h"
 #include "tmr0.h"

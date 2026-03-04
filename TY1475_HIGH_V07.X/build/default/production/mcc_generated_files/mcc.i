@@ -4838,9 +4838,9 @@ extern __bank0 __bit __timeout;
 # 50 "mcc_generated_files/mcc.h" 2
 
 # 1 "mcc_generated_files/pin_manager.h" 1
-# 161 "mcc_generated_files/pin_manager.h"
+# 164 "mcc_generated_files/pin_manager.h"
 void PIN_MANAGER_Initialize (void);
-# 173 "mcc_generated_files/pin_manager.h"
+# 176 "mcc_generated_files/pin_manager.h"
 void PIN_MANAGER_IOC(void);
 # 51 "mcc_generated_files/mcc.h" 2
 
@@ -5098,6 +5098,13 @@ char *tempnam(const char *, const char *);
 # 1 "mcc_generated_files/interrupt_manager.h" 1
 # 55 "mcc_generated_files/mcc.h" 2
 
+# 1 "mcc_generated_files/epwm1.h" 1
+# 96 "mcc_generated_files/epwm1.h"
+void EPWM1_Initialize(void);
+# 122 "mcc_generated_files/epwm1.h"
+void EPWM1_LoadDutyValue(uint16_t dutyValue);
+# 56 "mcc_generated_files/mcc.h" 2
+
 # 1 "mcc_generated_files/eccp3.h" 1
 # 80 "mcc_generated_files/eccp3.h"
 typedef union CCPR3Reg_tag
@@ -5118,13 +5125,6 @@ void ECCP3_Initialize(void);
 void ECCP3_CaptureISR(void);
 # 160 "mcc_generated_files/eccp3.h"
  void ECCP3_CallBack(uint16_t capturedValue);
-# 56 "mcc_generated_files/mcc.h" 2
-
-# 1 "mcc_generated_files/epwm1.h" 1
-# 96 "mcc_generated_files/epwm1.h"
-void EPWM1_Initialize(void);
-# 122 "mcc_generated_files/epwm1.h"
-void EPWM1_LoadDutyValue(uint16_t dutyValue);
 # 57 "mcc_generated_files/mcc.h" 2
 
 # 1 "mcc_generated_files/tmr1.h" 1

@@ -563,11 +563,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;mcc_generated_files/pin_manager.c: 61:     LATA = 0x00;
 [e = _LATA -> -> 0 `i `uc ]
 "62
-[; ;mcc_generated_files/pin_manager.c: 62:     LATB = 0x08;
-[e = _LATB -> -> 8 `i `uc ]
+[; ;mcc_generated_files/pin_manager.c: 62:     LATB = 0x48;
+[e = _LATB -> -> 72 `i `uc ]
 "63
-[; ;mcc_generated_files/pin_manager.c: 63:     LATC = 0x10;
-[e = _LATC -> -> 16 `i `uc ]
+[; ;mcc_generated_files/pin_manager.c: 63:     LATC = 0x00;
+[e = _LATC -> -> 0 `i `uc ]
 "68
 [; ;mcc_generated_files/pin_manager.c: 68:     TRISE = 0x08;
 [e = _TRISE -> -> 8 `i `uc ]
@@ -575,30 +575,30 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;mcc_generated_files/pin_manager.c: 69:     TRISA = 0xF6;
 [e = _TRISA -> -> 246 `i `uc ]
 "70
-[; ;mcc_generated_files/pin_manager.c: 70:     TRISB = 0xFF;
-[e = _TRISB -> -> 255 `i `uc ]
+[; ;mcc_generated_files/pin_manager.c: 70:     TRISB = 0xBF;
+[e = _TRISB -> -> 191 `i `uc ]
 "71
 [; ;mcc_generated_files/pin_manager.c: 71:     TRISC = 0xF9;
 [e = _TRISC -> -> 249 `i `uc ]
-"76
-[; ;mcc_generated_files/pin_manager.c: 76:     ANSELB = 0x37;
-[e = _ANSELB -> -> 55 `i `uc ]
-"77
-[; ;mcc_generated_files/pin_manager.c: 77:     ANSELA = 0x3F;
-[e = _ANSELA -> -> 63 `i `uc ]
-"82
-[; ;mcc_generated_files/pin_manager.c: 82:     WPUE = 0x00;
-[e = _WPUE -> -> 0 `i `uc ]
-"83
-[; ;mcc_generated_files/pin_manager.c: 83:     WPUB = 0x08;
-[e = _WPUB -> -> 8 `i `uc ]
+"78
+[; ;mcc_generated_files/pin_manager.c: 78:     ANSELB = 0;
+[e = _ANSELB -> -> 0 `i `uc ]
+"79
+[; ;mcc_generated_files/pin_manager.c: 79:     ANSELA = 0;
+[e = _ANSELA -> -> 0 `i `uc ]
 "84
-[; ;mcc_generated_files/pin_manager.c: 84:     OPTION_REGbits.nWPUEN = 0;
+[; ;mcc_generated_files/pin_manager.c: 84:     WPUE = 0x00;
+[e = _WPUE -> -> 0 `i `uc ]
+"85
+[; ;mcc_generated_files/pin_manager.c: 85:     WPUB = 0x08;
+[e = _WPUB -> -> 8 `i `uc ]
+"86
+[; ;mcc_generated_files/pin_manager.c: 86:     OPTION_REGbits.nWPUEN = 0;
 [e = . . _OPTION_REGbits 0 7 -> -> 0 `i `uc ]
-"90
-[; ;mcc_generated_files/pin_manager.c: 90:     APFCON = 0x00;
+"92
+[; ;mcc_generated_files/pin_manager.c: 92:     APFCON = 0x00;
 [e = _APFCON -> -> 0 `i `uc ]
-"97
-[; ;mcc_generated_files/pin_manager.c: 97: }
+"99
+[; ;mcc_generated_files/pin_manager.c: 99: }
 [e :UE 354 ]
 }

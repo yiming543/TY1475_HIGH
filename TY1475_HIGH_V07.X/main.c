@@ -17,30 +17,6 @@
   Version    :  2.00
  */
 
-/*
-    (c) 2018 Microchip Technology Inc. and its subsidiaries.
-
-    Subject to your compliance with these terms, you may use Microchip software
-   and any derivatives exclusively with Microchip products. It is your
-   responsibility to comply with third party license terms applicable to your
-   use of third party software (including open source software) that may
-   accompany Microchip software.
-
-    THIS SOFTWARE IS SUPPLIED BY MICROCHIP "AS IS". NO WARRANTIES, WHETHER
-    EXPRESS, IMPLIED OR STATUTORY, APPLY TO THIS SOFTWARE, INCLUDING ANY
-    IMPLIED WARRANTIES OF NON-INFRINGEMENT, MERCHANTABILITY, AND FITNESS
-    FOR A PARTICULAR PURPOSE.
-
-    IN NO EVENT WILL MICROCHIP BE LIABLE FOR ANY INDIRECT, SPECIAL, PUNITIVE,
-    INCIDENTAL OR CONSEQUENTIAL LOSS, DAMAGE, COST OR EXPENSE OF ANY KIND
-    WHATSOEVER RELATED TO THE SOFTWARE, HOWEVER CAUSED, EVEN IF MICROCHIP
-    HAS BEEN ADVISED OF THE POSSIBILITY OR THE DAMAGES ARE FORESEEABLE. TO
-    THE FULLEST EXTENT ALLOWED BY LAW, MICROCHIP'S TOTAL LIABILITY ON ALL
-    CLAIMS IN ANY WAY RELATED TO THIS SOFTWARE WILL NOT EXCEED THE AMOUNT
-    OF FEES, IF ANY, THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS
-    SOFTWARE.
- */
-
 // 202500806 TY1475_RX_HIGH V01 CS:E0EA
 // 參考 TY1475_HIGH件動作表.xlsx
 // 主要特點:
@@ -88,8 +64,9 @@
 // 抓到所有資料(包括車子沒有的信號)
 // 修正不符合KD件的亮燈方式
 
-// 20260304 V07 CS:7076
+// 20260304 V07 CS:0318
 // 新增lamp off信號(關閉所有LED)
+// 修正UART TX輸出RB6
 
 #include "mcc_generated_files/mcc.h"
 #include "mcc_generated_files/pin_manager.h"
@@ -154,6 +131,7 @@ bool fException2 = 0;
 bool fLampSide = 0;
 
 #define LOGIC_LEVEL (16)
+#define UART_LEVEL (25)
 #define HiBeam_ON() HB_EN_SetHigh()
 #define HiBeam_OFF() HB_EN_SetLow()
 #define LoBeam_ON() LB_EN_SetHigh()
@@ -172,6 +150,7 @@ bool fLampSide = 0;
 #define LampSideSelect() Lamp_R_EN_PORT
 #define LAMP_R_SIDE 0
 #define LAMP_L_SIDE 1
+#define UART_TX_PIN UART_TX_LAT
 
 static uint8_t CS[64] = {
     // 行車,晝行,近燈,遠燈,左方,右方
@@ -573,7 +552,7 @@ void ECCP3_CallBack(uint16_t capturedValue) {
       if (falling_edge_time >= rising_edge_time) {
         pluse_width_HI = falling_edge_time - rising_edge_time;
       } else {
-        pluse_width_HI = (0xffff - rising_edge_time) + falling_edge_time;
+        pluse_width_HI = ~rising_edge_time +1 + falling_edge_time;
       }
       LO_us = (pluse_width_LO >> 3) & 0xff;
       HI_us = (pluse_width_HI >> 3) & 0xff;
@@ -582,24 +561,27 @@ void ECCP3_CallBack(uint16_t capturedValue) {
       else
         diff_us = LO_us - HI_us;
 
+      if(HI_us > UART_LEVEL){
+        UART_TX_PIN = 1;
+      }
+      else{
+        UART_TX_PIN = 0;
+      }
+
       if (fHead == 0) {
-        UART_TX_SetHigh();
         // init
         if (diff_us < LOGIC_LEVEL) {
           // logical '0'
           fHead = 1;
           data_cnt = 0;
-          UART_TX_SetLow();
         }
       } else {
         // data
         if (diff_us < LOGIC_LEVEL) {
           // logical '0'
-          UART_TX_SetLow();
           rx_data &= ~(1 << data_cnt);
         } else {
           // logical '1'
-          UART_TX_SetHigh();
           rx_data |= (1 << data_cnt);
         }
 

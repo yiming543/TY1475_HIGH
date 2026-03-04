@@ -7,7 +7,7 @@
 # 1 "C:/Users/t00904/.mchp_packs/Microchip/PIC12-16F1xxx_DFP/1.2.63/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
 # 1 "main.c" 2
-# 94 "main.c"
+# 71 "main.c"
 # 1 "./mcc_generated_files/mcc.h" 1
 # 49 "./mcc_generated_files/mcc.h"
 # 1 "C:/Users/t00904/.mchp_packs/Microchip/PIC12-16F1xxx_DFP/1.2.63/xc8\\pic\\include\\xc.h" 1 3
@@ -4838,9 +4838,9 @@ extern __bank0 __bit __timeout;
 # 50 "./mcc_generated_files/mcc.h" 2
 
 # 1 "./mcc_generated_files/pin_manager.h" 1
-# 161 "./mcc_generated_files/pin_manager.h"
+# 164 "./mcc_generated_files/pin_manager.h"
 void PIN_MANAGER_Initialize (void);
-# 173 "./mcc_generated_files/pin_manager.h"
+# 176 "./mcc_generated_files/pin_manager.h"
 void PIN_MANAGER_IOC(void);
 # 51 "./mcc_generated_files/mcc.h" 2
 
@@ -5098,6 +5098,13 @@ char *tempnam(const char *, const char *);
 # 1 "./mcc_generated_files/interrupt_manager.h" 1
 # 55 "./mcc_generated_files/mcc.h" 2
 
+# 1 "./mcc_generated_files/epwm1.h" 1
+# 96 "./mcc_generated_files/epwm1.h"
+void EPWM1_Initialize(void);
+# 122 "./mcc_generated_files/epwm1.h"
+void EPWM1_LoadDutyValue(uint16_t dutyValue);
+# 56 "./mcc_generated_files/mcc.h" 2
+
 # 1 "./mcc_generated_files/eccp3.h" 1
 # 80 "./mcc_generated_files/eccp3.h"
 typedef union CCPR3Reg_tag
@@ -5118,13 +5125,6 @@ void ECCP3_Initialize(void);
 void ECCP3_CaptureISR(void);
 # 160 "./mcc_generated_files/eccp3.h"
  void ECCP3_CallBack(uint16_t capturedValue);
-# 56 "./mcc_generated_files/mcc.h" 2
-
-# 1 "./mcc_generated_files/epwm1.h" 1
-# 96 "./mcc_generated_files/epwm1.h"
-void EPWM1_Initialize(void);
-# 122 "./mcc_generated_files/epwm1.h"
-void EPWM1_LoadDutyValue(uint16_t dutyValue);
 # 57 "./mcc_generated_files/mcc.h" 2
 
 # 1 "./mcc_generated_files/tmr1.h" 1
@@ -5191,7 +5191,7 @@ void SYSTEM_Initialize(void);
 void OSCILLATOR_Initialize(void);
 # 100 "./mcc_generated_files/mcc.h"
 void WDT_Initialize(void);
-# 94 "main.c" 2
+# 71 "main.c" 2
 
 
 
@@ -5253,7 +5253,7 @@ volatile uint8_t T10MS_CNT = 0;
 _Bool fException = 0;
 _Bool fException2 = 0;
 _Bool fLampSide = 0;
-# 176 "main.c"
+# 155 "main.c"
 static uint8_t CS[64] = {
 
     0x4C,
@@ -5390,7 +5390,7 @@ void DRL_ON(void) {
     else if(csFlag.turnLight_L == 1 && csFlag.RunLight == 1)
       pwm_duty = (50);
   }
-# 323 "main.c"
+# 302 "main.c"
   EPWM1_LoadDutyValue(pwm_duty);
 }
 
@@ -5499,7 +5499,7 @@ void LED_output(void) {
   for (uint8_t i = 0; i < 11; i++) {
     data_buf[i] = 0;
   }
-# 444 "main.c"
+# 423 "main.c"
 }
 
 void check_input(void) {
@@ -5632,7 +5632,7 @@ void ECCP3_CallBack(uint16_t capturedValue) {
       if (falling_edge_time >= rising_edge_time) {
         pluse_width_HI = falling_edge_time - rising_edge_time;
       } else {
-        pluse_width_HI = (0xffff - rising_edge_time) + falling_edge_time;
+        pluse_width_HI = ~rising_edge_time +1 + falling_edge_time;
       }
       LO_us = (pluse_width_LO >> 3) & 0xff;
       HI_us = (pluse_width_HI >> 3) & 0xff;
@@ -5641,24 +5641,27 @@ void ECCP3_CallBack(uint16_t capturedValue) {
       else
         diff_us = LO_us - HI_us;
 
+      if(HI_us > (25)){
+        LATBbits.LATB6 = 1;
+      }
+      else{
+        LATBbits.LATB6 = 0;
+      }
+
       if (fHead == 0) {
-        do { LATCbits.LATC4 = 1; } while(0);
 
         if (diff_us < (16)) {
 
           fHead = 1;
           data_cnt = 0;
-          do { LATCbits.LATC4 = 0; } while(0);
         }
       } else {
 
         if (diff_us < (16)) {
 
-          do { LATCbits.LATC4 = 0; } while(0);
           rx_data &= ~(1 << data_cnt);
         } else {
 
-          do { LATCbits.LATC4 = 1; } while(0);
           rx_data |= (1 << data_cnt);
         }
 
